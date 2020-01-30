@@ -1,0 +1,53 @@
+# Models
+type Game {
+    _id: ID!
+    name: String,
+    image: String,
+    price: String
+}
+
+type Studio {
+    _id: ID,
+    name: String,
+    image: String
+}
+
+
+# Inputs 
+input GameInput {
+    name: String!,
+    image: String,
+    price: String!
+}
+
+input GameEditInput {
+    name: String,
+    image: String,
+    price: String
+}
+
+input StudioInput {
+    name: String!,
+    image: String,
+}
+
+input StudioEditInput {
+    name: String,
+    image: String,
+}
+
+# Queries
+type Query {
+    getGames: [Game]
+    getGame(id: ID!): Game,
+    getStudios: [Studio]
+    getStudio(id: ID!): Studio,
+}
+
+type Mutation {
+    createGame(input: GameInput!): Game
+    editGame(_id: ID!, input: GameEditInput!): Game
+    
+    createStudio(input: StudioInput!): Studio
+    editStudio(_id: ID!, input: StudioEditInput!): Studio
+}
