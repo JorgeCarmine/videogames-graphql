@@ -47,7 +47,9 @@ type Query {
 type Mutation {
     createGame(input: GameInput!): Game
     editGame(_id: ID!, input: GameEditInput!): Game
-    
+    deleteGame(_id: ID): Game
+
     createStudio(input: StudioInput!): Studio
     editStudio(_id: ID!, input: StudioEditInput!): Studio
+    deleteStudio(_id: ID): Studio
 }
