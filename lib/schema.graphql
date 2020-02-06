@@ -3,13 +3,16 @@ type Game {
     _id: ID!
     name: String,
     image: String,
-    price: String
+    price: String,
+    studioID: ID
+    studio: Studio
 }
 
 type Studio {
     _id: ID,
     name: String,
-    image: String
+    image: String,
+    games: [Game]
 }
 
 
@@ -18,6 +21,13 @@ input GameInput {
     name: String!,
     image: String,
     price: String!
+}
+
+input GameQueryInput {
+    name: String,
+    image: String,
+    price: String,
+    studioID: ID
 }
 
 input GameEditInput {
@@ -38,18 +48,27 @@ input StudioEditInput {
 
 # Queries
 type Query {
-    getGames: [Game]
+    getGames(input: GameQueryInput): [Game]
     getGame(id: ID!): Game,
     getStudios: [Studio]
     getStudio(id: ID!): Studio,
 }
 
 type Mutation {
+    "Crear un juego"
     createGame(input: GameInput!): Game
+    "Editar un juego"
     editGame(_id: ID!, input: GameEditInput!): Game
+    "Eliminar un juego"
     deleteGame(_id: ID): Game
 
+    "Crear un estudio"
     createStudio(input: StudioInput!): Studio
+    "Editar un estudio"
     editStudio(_id: ID!, input: StudioEditInput!): Studio
+    "Eliminar un estudio"
     deleteStudio(_id: ID): Studio
+
+    "Agregar un juego a un estudio"
+    addStudioGame(gameID: ID!, studioID: ID!): Game
 }
